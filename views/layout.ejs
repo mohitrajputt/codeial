@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <%- style %>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('_header'); %>
+        <%- body %>
+            <%- include('_footer'); %>
+                <%- script %>
+</body>
+
+</html>

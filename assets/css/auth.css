@@ -1,0 +1,60 @@
+.container {
+    background-color: azure;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 400px;
+    max-width: 100%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    top: 15%;
+    left: 35%;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 4px 4px 0 0;
+}
+
+.tab:first-child {
+    border-radius: 4px 0 0 0;
+}
+
+.tab:last-child {
+    border-radius: 0 4px 0 0;
+}
+
+.content {
+    padding: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
