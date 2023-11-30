@@ -1,4 +1,32 @@
+ul{
+    padding: 0;
+}
 
-h1{
-    color: blueviolet;
+.show-posts ul li{
+    width: 40vw;
+    border: 2px solid black;
+    list-style: none;
+    margin: 4px;
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.user{
+    text-align: right;
+}
+
+.delete{
+    text-align: right;
+    cursor: pointer;
+}
+
+#comment{
+    width: 100%;
+    margin: 4px auto;
+    border: 1.5px solid black;
+}
+
+.comment-content{
+    display: flex;
+    justify-content: space-between;
 }
