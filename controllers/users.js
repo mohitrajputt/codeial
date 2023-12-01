@@ -81,6 +81,7 @@ module.exports.signIn = function (req, res) {
     // });
 
     // using passport
+    req.flash('success', 'Logged in Successfully');
     return res.redirect('/user/profile');
 }
 
@@ -89,6 +90,7 @@ module.exports.signOut = function (req, res, next) {
         if (err) {
             return next(err);
         }
+        req.flash('success', 'You have logged out!');
         res.redirect('/');
     })
 }

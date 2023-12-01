@@ -6,22 +6,22 @@ module.exports.create = function(req, res){
         content: req.body.content,
         user: req.user._id
     });
+    req.flash('success','Post published!');
     return res.redirect('back');
 }
 
-module.exports.delete = function(req, res) {
-    Post.findById(req.params.id).then( (post) => {
-        if(post.user == req.user.id){
-            post.deleteOne().then( () => {
-                Comment.deleteMany({post: req.params.id});
-                return res.redirect('back');
-            })
-        }
-        else{
-            return res.redirect('back');
-        }
-    }).catch( (err) => {
-        console.log(err);
-        return;
-    })
+module.exports.delete = async function(req, res) {
+
+    let post = await Post.findById(req.params.id);
+    
+    if (post.user == req.user.id) {
+        await post.deleteOne();
+        await Comment.deleteMany({ post: req.params.id });
+        req.flash('success','Post deleted!');
+        return res.redirect('back');
+    }
+    else {
+        req.flash('success','User not allowed to delete this post!');
+        return res.redirect('back');
+    }
 };

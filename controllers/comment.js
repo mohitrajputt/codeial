@@ -1,48 +1,51 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 
-module.exports.create = function(req, res){
-    Post.findById(req.body.post).then( (post) => {
-        Comment.create({
-            content: req.body.content,
-            post: req.body.post,
-            user: req.user._id
-        }).then( (comment) => {
-            post.comments.push(comment);
-            post.save();
+module.exports.create = async function(req, res){
 
-            res.redirect('/');
-        } )
-    }).catch( (err) => {
-        console.log('error while creating comment',err);
-        return
-    })
+    let post = await Post.findById(req.body.post);
+
+    let comment = await Comment.create({
+        content: req.body.content,
+        post: req.body.post,
+        user: req.user._id
+    });
+    
+    post.comments.push(comment);
+    
+    post.save();
+    
+    req.flash('success','Comment published!');
+    res.redirect('/');
+
 }
 
-module.exports.delete = function(req, res) {
-    Comment.findById(req.params.id).then((comment) => {
-        if (comment.user == req.user.id) {
-            let postId = comment.post;
-            comment.deleteOne().then(() => {
-                return Post.findByIdAndUpdate(
-                    postId,
-                    {
-                        $pull: {
-                            comments: req.params.id
-                        }
-                    }
-                );
-            }).then(() => {
-                return res.redirect('back');
-            }).catch((err) => {
-                console.log(err);
-                return res.status(500).send('Internal Server Error');
-            });
-        } else {
-            return res.redirect('back');
-        }
-    }).catch((err) => {
-        console.log(err);
-        return res.status(500).send('Internal Server Error');
-    });
+module.exports.delete = async function(req, res) {
+
+    let comment = await Comment.findById(req.params.id)
+    
+    if (comment.user == req.user.id) {
+
+        let postId = comment.post;
+
+        await comment.deleteOne();
+        
+        await Post.findByIdAndUpdate(
+            postId,
+            {
+                $pull: {
+                    comments: req.params.id
+                }
+            }
+        );
+
+        req.flash('success','Comment deleted!');
+        return res.redirect('back');
+
+    } else {
+        req.flash('success','User not allowed to delete this post!');
+        return res.redirect('back');
+    }
+
+
 };

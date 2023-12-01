@@ -24,27 +24,10 @@
                 </div>
                 <h4 class="user-content" ><%= i.content %></h4>
                 <h6 class="user" >Posted by <%= i.user.username %></h6>
-                <div class="post-comment">
-                    <% if(locals.user) { %>
-                        <form action="/comments/create" method="post" >
-                            <input type="text" name="content" placeholder="Type here to add comment" required>
-                            <input type="hidden" name="post" value="<%= i._id %>">
-                            <input type="submit" value="ADD Comment">
-                        </form>
-                    <% } %>
-                </div>
-                <div class="show-comments">
-                    <ul>
-                        <% for ( j of i.comments) { %>
-                            <li id="comment" >
-                                <% if (locals.user &&  (j.user.id == locals.user.id || j.user.id == j.post.id )) { %>
-                                <a href="/comments/delete/<%= j.id %>">X</a>
-                                <% } %>
-                                <p class="comment-content" > <%= j.content %> <small class="comment-author" >Commented by <%= j.user.username %></small> </p>
-                                <% } %>
-                            </li>
-                    </ul>
-                </div>
+                
+                <%- include('_postComments'); %>
+                <%- include('_showComments'); %>
+                
             </li>
         <%}%>
     </ul>

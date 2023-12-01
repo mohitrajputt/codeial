@@ -1,0 +1,13 @@
+<!-- Display comment -->
+<div class="show-comments">
+    <ul>
+        <% for ( j of i.comments) { %>
+            <li id="comment" >
+                <% if (locals.user &&  (j.user.id == locals.user.id || j.user.id == j.post.id )) { %>
+                <a href="/comments/delete/<%= j.id %>">X</a>
+                <% } %>
+                <p class="comment-content" > <%= j.content %> <small class="comment-author" >Commented by <%= j.user.username %></small> </p>
+                <% } %>
+            </li>
+    </ul>
+</div>
