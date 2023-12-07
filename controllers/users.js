@@ -82,7 +82,7 @@ module.exports.signIn = function (req, res) {
 
     // using passport
     req.flash('success', 'Logged in Successfully');
-    return res.redirect('/user/profile');
+    return res.redirect('/');
 }
 
 module.exports.signOut = function (req, res, next) {
