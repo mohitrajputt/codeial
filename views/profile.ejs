@@ -1,7 +1,20 @@
 <link rel="stylesheet" href="/css/profile.css">
 
 <section class="user">
+
+    <div class="user-avatar">
+        <img src="" alt="<%= user.username %>" width="100">
+    </div>
+
+    <div class="select-avatar">
+        <form action="/users/update" enctype="multipart/form-data" method="post">
+            <input type="file" name="avatar" > 
+            <input type="submit" value="update">
+        </form>
+    </div>
+
     <h1> User: <%= user.username %> </h1>
     
     <li><a href="/user/signout">Log-out</a></li>
-</section>
+
+</section> 

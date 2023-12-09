@@ -18,9 +18,17 @@ module.exports.profile = function (req, res) {
     // }
 
     // using passport
-    return res.render('profile', {
-        title: 'User Profile'
+    User.findById(req.params.id).then( (user) => {
+        return res.render('profile', {
+            title: 'User Profile',
+            userProfile: user
+        });
     });
+}
+
+module.exports.update = function(req, res) {
+    
+    return res.redirect('back');
 }
 
 module.exports.auth = function (req, res) {
